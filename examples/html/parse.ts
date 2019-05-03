@@ -57,28 +57,32 @@ const htmlParser = () => {
     attributes,
     empty(P.seq(ws, slash, angleBracketClose))
   );
+  const selfClosingTagChoice = P.choice(
+    ...[
+      "area",
+      "base",
+      "br",
+      "col",
+      "embed",
+      "hr",
+      "img",
+      "input",
+      "link",
+      "meta",
+      "param",
+      "source",
+      "track",
+      "wbr"
+    ].map(token => P.token(token))
+  )
   const selfClosingTagWithoutSlash = P.seq(
     empty(P.seq(angleBracketOpen, ws)),
-    P.choice(
-      ...[
-        "area",
-        "base",
-        "br",
-        "col",
-        "embed",
-        "hr",
-        "img",
-        "input",
-        "link",
-        "meta",
-        "param",
-        "source",
-        "track",
-        "wbr"
-      ].map(token => P.token(token))
-    ),
+    selfClosingTagChoice,
     attributes,
     empty(P.seq(ws, angleBracketClose))
+  );
+  const selfClosingTagClose = empty(
+    P.seq(angleBracketOpen, slash, selfClosingTagChoice, ws, angleBracketClose)
   );
 
   const body = P.lazy();
@@ -112,6 +116,7 @@ const htmlParser = () => {
   const paragraph = P.choice(
     doctype,
     selfClosingTagWithoutSlash,
+    selfClosingTagClose,
     selfClosingTag,
     tag,
     empty(P.regex(/\s/)),

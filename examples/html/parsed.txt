@@ -50,14 +50,15 @@ node
             |  `- node
             |     `- val("Lorem\nIpsum\n    ": string)
             |- node
-            |  |- val("br": string)
-            |  `- node
-            |- node
-            |  |- val("hr": string)
+            |  |- val("img": string)
             |  `- node
             |- node
             |  |- val("br": string)
             |  `- node
+            |- node
+            |  |- val("img": string)
+            |  `- node
+            |- val("aiueo": string)
             `- node
                |- val("<!--": string)
                `- val(" comment ": string)
