@@ -52,6 +52,12 @@ node
             |- node
             |  |- val("br": string)
             |  `- node
+            |- node
+            |  |- val("hr": string)
+            |  `- node
+            |- node
+            |  |- val("br": string)
+            |  `- node
             `- node
                |- val("<!--": string)
                `- val(" comment ": string)
