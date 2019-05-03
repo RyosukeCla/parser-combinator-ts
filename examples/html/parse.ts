@@ -60,11 +60,26 @@ const htmlParser = () => {
   const selfClosingTagWithoutSlash = P.seq(
     empty(P.seq(angleBracketOpen, ws)),
     P.choice(
-      ...['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'].map(token => P.token(token))
+      ...[
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr"
+      ].map(token => P.token(token))
     ),
     attributes,
     empty(P.seq(ws, angleBracketClose))
-  )
+  );
 
   const body = P.lazy();
 
