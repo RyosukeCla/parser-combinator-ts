@@ -1,0 +1,21 @@
+{
+  "name": "parser-combinator-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node ./src/index.ts",
+    "dev:debug": "DEBUG=true ts-node ./src/index.ts",
+    "sample": "DEBUG=true ts-node",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
+  "author": "RyosukeCla",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^11.13.8",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.4.5"
+  }
+}
