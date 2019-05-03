@@ -110,13 +110,13 @@ const htmlParser = () => {
   );
 
   const paragraph = P.choice(
+    doctype,
     selfClosingTagWithoutSlash,
     selfClosingTag,
     tag,
     empty(P.regex(/\s/)),
     characters,
-    comment,
-    doctype
+    comment
   );
 
   body.setParser(P.many(paragraph));
