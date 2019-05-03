@@ -36,7 +36,7 @@ export const parse = <A>(parser: Parser<A>, target: string) => {
   const targetLen = target.length;
   const parsed = parser(target)(0);
   if (parsed.success && parsed.position === targetLen) {
-    return parsed.node || "";
+    return parsed.node;
   } else {
     _DEBUGGER_.analyze();
     console.log((parsed.node || "").toString());
