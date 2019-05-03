@@ -1,0 +1,57 @@
+node
+|- node
+|  |- val("<!DOCTYPE": string)
+|  `- node
+|     `- val("html": string)
+`- node
+   |- val("html": string)
+   |- node
+   `- node
+      |- node
+      |  |- val("head": string)
+      |  |- node
+      |  `- node
+      |     |- node
+      |     |  |- val("title": string)
+      |     |  |- node
+      |     |  `- node
+      |     |     `- val("html sample": string)
+      |     `- node
+      |        |- val("meta": string)
+      |        `- node
+      `- node
+         |- val("body": string)
+         |- node
+         `- node
+            |- node
+            |  |- val("div": string)
+            |  |- node
+            |  `- node
+            |     `- val("Hello, world!": string)
+            |- node
+            |  |- val("button": string)
+            |  |- node
+            |  |  `- node
+            |  |     `- val("disabled": string)
+            |  `- node
+            |     `- val("sample button": string)
+            |- node
+            |  |- val("div:aiueo": string)
+            |  |- node
+            |  |  |- node
+            |  |  |  |- val("data-test": string)
+            |  |  |  `- val("data": string)
+            |  |  |- node
+            |  |  |  |- val("attr1": string)
+            |  |  |  `- val("yes": string)
+            |  |  `- node
+            |  |     |- val("attr2": string)
+            |  |     `- val("1234": string)
+            |  `- node
+            |     `- val("Lorem\nIpsum\n    ": string)
+            |- node
+            |  |- val("br": string)
+            |  `- node
+            `- node
+               |- val("<!--": string)
+               `- val(" comment ": string)
