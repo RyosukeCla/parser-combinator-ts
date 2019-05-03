@@ -4,8 +4,10 @@
 
 ### html
 
-- [html parser](./examples/html.ts)
-- `npm run example -- ./examples/html.ts`
+- [parse html](./examples/html/parse.ts)
+- [html sample](./examples/html/sample.html)
+- [parsed tree](./examples/html/parsed.txt)
+- `npm run example -- ./examples/html/parse.ts`
 
 ## usage
 
