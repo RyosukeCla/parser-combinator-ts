@@ -85,10 +85,6 @@ const htmlParser = () => {
     P.seq(angleBracketOpen, slash, selfClosingTagChoice, ws, angleBracketClose)
   );
 
-  const body = P.lazy();
-
-  const tag = P.flat(P.seq(tagOpen, P.unit(body.getParser()), tagClose));
-
   const doctype = P.seq(
     P.choice(P.token("<!DOCTYPE"), P.token("<!doctype")),
     P.flat(
@@ -113,6 +109,8 @@ const htmlParser = () => {
     P.seq(P.token("<!--"), P.regex(/(.|\s)*(?=-->)/m), empty(P.token("-->")))
   );
 
+  const body = P.lazy();
+  const tag = P.flat(P.seq(tagOpen, P.unit(body.getParser()), tagClose));
   const paragraph = P.choice(
     doctype,
     selfClosingTagWithoutSlash,
