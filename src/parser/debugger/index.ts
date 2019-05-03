@@ -1,4 +1,4 @@
-import { Parser, State } from "./core";
+import { Parser, State } from "../core";
 
 export interface DebugProcess {
   type: string;
