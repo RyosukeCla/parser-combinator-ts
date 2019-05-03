@@ -2,12 +2,19 @@
 
 ## examples
 
-### html
+### html - v1
 
 - [parse html](./examples/html/parse.ts)
 - [html sample](./examples/html/sample.html)
 - [parsed tree](./examples/html/parsed.txt)
 - `npm run example -- ./examples/html/parse.ts`
+
+### html - v2
+
+- [parse html](./examples/html2/parse.ts)
+- [html sample](./examples/html2/sample.html)
+- [parsed tree (json)](./examples/html2/parsed.json)
+- `npm run example -- ./examples/html2/parse.ts`
 
 ## usage
 
