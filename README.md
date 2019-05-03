@@ -1,5 +1,12 @@
 # parser-combinator-ts
 
+## examples
+
+### html
+
+- [html parser](./examples/html.ts)
+- `npm run example -- ./examples/html.ts`
+
 ## usage
 
 ### parse
