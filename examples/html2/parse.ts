@@ -8,7 +8,10 @@ enum BlockType {
   SelfClose = 'SelfClose',
   Doctype = 'Doctype',
   Comment = 'Comment',
-  Contents = 'Contents'
+  Contents = 'Contents',
+
+  // for json
+  Tag = 'Tag',
 }
 
 interface Attributes {
@@ -21,7 +24,7 @@ interface Block {
   attributes: Attributes
 }
 
-const htmlParser = () => {
+const htmlTokenizer = () => {
   const angleBracketOpen = P.token("<");
   const angleBracketClose = P.token(">");
   const slash = P.token("/");
@@ -133,12 +136,125 @@ const htmlParser = () => {
   return parser;
 };
 
+class DomNode {
+  private parent: DomNode | null
+  private children: DomNode[]
+  private value: any
+  constructor(value: any) {
+    this.value = value
+    this.children = []
+    this.parent = null
+  }
+  setParent(parent: DomNode) {
+    this.parent = parent
+  }
+  addChild(child: DomNode) {
+    this.children.push(child)
+  }
+  assign(value: any) {
+    Object.assign(this.value, value)
+  }
+  getParent() {
+    return this.parent
+  }
+  getChildren() {
+    return this.children
+  }
+  getValue() {
+    return this.value
+  }
+}
+
+const domNodeToJson = (node: DomNode) => {
+  const result: any = node.getValue()
+  const children = node.getChildren().map(child => domNodeToJson(child))
+  if (children.length) {
+    result.children = children
+  }
+  return result
+}
+
+const parseHtml = (blocks: Block[]) => {
+  const SELF_CLOSING_TAGS = [
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr"
+  ]
+  let html = new DomNode({})
+  let currentDom = html
+  let isTopLevelDom = true
+  for (const block of blocks) {
+    const type = block.type
+    if (type === BlockType.Open) {
+      block.type = BlockType.Tag
+      // top level
+      if (isTopLevelDom) {
+        html.assign(block)
+        isTopLevelDom = false
+        continue
+      }
+
+      // self closing tag
+      const isSelfClosed = SELF_CLOSING_TAGS.find(tag => tag === block.name.toLowerCase())
+      if (isSelfClosed) {
+        const dom = new DomNode(block)
+        currentDom.addChild(dom)
+        continue
+      }
+
+      // normal tag open
+      const dom = new DomNode(block)
+      currentDom.addChild(dom)
+      dom.setParent(currentDom)
+      currentDom = dom
+    } else if (type === BlockType.Close) {
+      // self closing tag
+      const isSelfClosed = SELF_CLOSING_TAGS.find(tag => tag === block.name.toLowerCase())
+      if (isSelfClosed) {
+        continue
+      }
+
+      const parent = currentDom.getParent()
+      if (parent) currentDom = parent
+    } else if (type === BlockType.SelfClose) {
+      block.type = BlockType.Tag
+      const dom = new DomNode(block)
+      currentDom.addChild(dom)
+    } else if (type === BlockType.Comment || type === BlockType.Contents) {
+      const dom = new DomNode(block)
+      currentDom.addChild(dom)
+    } else if (type === BlockType.Doctype) {
+      html.assign({
+        doctype: block.attributes
+      })
+    }
+  }
+  return html
+}
+
 const main = () => {
-  const parser = htmlParser();
+  const tokenizer = htmlTokenizer()
   const html = fs.readFileSync(path.join(__dirname, "./sample.html"));
-  const res = P.parse(parser, html.toString());
-  console.log(res.toString());
-  fs.writeFileSync(path.join(__dirname, "./parsed.txt"), res.toString());
+  const tokenized = P.parse(tokenizer, html.toString()) as P.PNodes;
+  console.log(tokenized.toString())
+  const blocks = tokenized.unwrap().map(value => value.unwrap() as Block)
+  console.log(blocks);
+  const parsed = parseHtml(blocks);
+  const parsedJson = domNodeToJson(parsed)
+  const jsonStr = JSON.stringify(parsedJson, null, '  ')
+  console.log(jsonStr)
+  fs.writeFileSync(path.join(__dirname, "./parsed.json"), jsonStr)
 };
 
 main();

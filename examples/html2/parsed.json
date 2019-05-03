@@ -1,0 +1,108 @@
+{
+  "doctype": {
+    "html": "html"
+  },
+  "type": "Tag",
+  "name": "html",
+  "attributes": {},
+  "children": [
+    {
+      "type": "Tag",
+      "name": "head",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Tag",
+          "name": "title",
+          "attributes": {},
+          "children": [
+            {
+              "type": "Contents",
+              "name": "html sample",
+              "attributes": {}
+            }
+          ]
+        },
+        {
+          "type": "Tag",
+          "name": "meta",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "type": "Tag",
+      "name": "body",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Tag",
+          "name": "div",
+          "attributes": {},
+          "children": [
+            {
+              "type": "Contents",
+              "name": "Hello, world!",
+              "attributes": {}
+            }
+          ]
+        },
+        {
+          "type": "Tag",
+          "name": "button",
+          "attributes": {
+            "disabled": "true"
+          },
+          "children": [
+            {
+              "type": "Contents",
+              "name": "sample button",
+              "attributes": {}
+            }
+          ]
+        },
+        {
+          "type": "Tag",
+          "name": "div:aiueo",
+          "attributes": {
+            "data-test": "data",
+            "attr1": "yes",
+            "attr2": "1234"
+          },
+          "children": [
+            {
+              "type": "Contents",
+              "name": "Lorem\nIpsum\n    ",
+              "attributes": {}
+            }
+          ]
+        },
+        {
+          "type": "Tag",
+          "name": "img",
+          "attributes": {}
+        },
+        {
+          "type": "Tag",
+          "name": "br",
+          "attributes": {}
+        },
+        {
+          "type": "Tag",
+          "name": "img",
+          "attributes": {}
+        },
+        {
+          "type": "Contents",
+          "name": "aiueo",
+          "attributes": {}
+        },
+        {
+          "type": "Comment",
+          "name": " comment ",
+          "attributes": {}
+        }
+      ]
+    }
+  ]
+}
