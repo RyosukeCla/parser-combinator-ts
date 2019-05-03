@@ -106,7 +106,7 @@ const main = () => {
   const html = fs.readFileSync(path.join(__dirname, "./sample.html"));
   const res = P.parse(parser, html.toString());
   console.log(res.toString());
-  fs.writeFileSync(path.join(__dirname, "./parsed.txt"), res.toString())
+  fs.writeFileSync(path.join(__dirname, "./parsed.txt"), res.toString());
 };
 
 main();
