@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node ./src/index.ts",
     "dev:debug": "DEBUG=true ts-node ./src/index.ts",
-    "sample": "DEBUG=true ts-node",
+    "example": "DEBUG=true ts-node",
     "build": "tsc",
     "start": "node ./dist/index.js"
   },
