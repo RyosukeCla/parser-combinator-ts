@@ -47,6 +47,12 @@ P.regex(/regex/);
 P.seq(parserA, parserB, parserC);
 ```
 
+#### seqN
+
+```ts
+P.seqN(3)(parser) // equals to P.seq(parser, parser, parser)
+```
+
 #### option
 
 ```ts
@@ -57,6 +63,14 @@ P.option(parserA, parserB, parserC);
 
 ```ts
 P.many(parser);
+```
+
+#### manyN
+
+more than N times.
+
+```ts
+P.manyN(1)(parser)
 ```
 
 #### map
