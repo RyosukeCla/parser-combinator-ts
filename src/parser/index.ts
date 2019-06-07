@@ -24,6 +24,8 @@ export { default as pick } from "./pick";
 
 // the applied
 export { default as lazy } from "./lazy";
+export { default as manyN } from "./manyN";
+export { default as seqN } from './seqN';
 
 // etc
 export { default as log } from "./log";
